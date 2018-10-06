@@ -22,7 +22,8 @@ void Datastav::Execute(void){
 bool Datastav::Is_Mounted(void){
   bool Mounted = false;
   
-  mtab = setmntent("/etc/mtab", "r");
+  FILE* mtab = setmntent("/etc/mtab", "r");
+  mntent* entry;
     
   do{
     entry = getmntent(mtab);
@@ -40,18 +41,4 @@ bool Datastav::Is_Mounted(void){
 
 bool Datastav::Serviceable(void){
   return Is_Serviceable;
-}
-
-int main(){
-  Datastav D;
-  D.Initialize();
-  do{
-    D.Execute();
-    if(D.Serviceable()){
-      printf("Serviceable\n");
-    }
-    else{
-      printf("Not serviceable\n");
-    }
-  }while(1);
 }

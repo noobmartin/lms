@@ -1,0 +1,1 @@
+g++ src/lms.cpp src/components/styr_och_logikenhet/sol.cpp src/components/databussadapter/databussadapter.cpp src/components/datastav/datastav.cpp -I src/interfaces -I src/components/databussadapter -I src/components/datastav -I src/components/styr_och_logikenhet -o bin/lms

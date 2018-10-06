@@ -3,7 +3,7 @@
 
 namespace Indicator_Provider{
  
-  typedef enum Indication_State_Type{
+  enum Indication_State_Type{
     On,
     Off
   };

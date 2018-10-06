@@ -29,20 +29,3 @@ void Databussadapter::Execute(void){
 bool Databussadapter::Serviceable(void){
   return Is_Serviceable;
 }
-
-
-int main(){
-  Databussadapter DBA;
-  DBA.Initialize();
-  do{
-    DBA.Execute();
-    if(DBA.Serviceable()){
-      printf("Serviceable\n");
-    }
-    else{
-      printf("Not serviceable\n");
-    }
-    sleep(1);
-  }while(1);
-}
-

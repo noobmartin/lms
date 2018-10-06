@@ -1,6 +1,8 @@
 #ifndef _datastav_hpp
 #define _datastav_hpp
 
+#include <cstdio>
+
 #include "component_execution_provider.hpp"
 #include "component_serviceability_provider.hpp"
 
@@ -17,8 +19,6 @@ class Datastav:
   private:
     bool Is_Mounted(void);
     bool Is_Serviceable;
-    FILE* mtab;
-    mntent* entry;
 };
 
 #endif
