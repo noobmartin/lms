@@ -3,11 +3,25 @@
 void Indikatorpanel::Initialize(void){
   Recording = false;
   Telemetry = false;
-  Fault    = false;
+  Fault     = false;
+  
+  Fault_Indication = new GPIOClass("4");
+  Recording_Indication = new GPIOClass("17");
+  Telemetry_Indication = new GPIOClass("21");
+  
+  Fault_Indication->export_gpio();
+  Recording_Indication->export_gpio();
+  Telemetry_Indication->export_gpio();
+  
+  Fault_Indication->setdir_gpio("out");
+  Recording_Indication->setdir_gpio("out");
+  Telemetry_Indication->setdir_gpio("out");
 }
 
 void Indikatorpanel::Execute(void){
-  
+  Fault_Indication->setval_gpio(Fault);
+  Recording_Indication->setval_gpio(Recording);
+  Telemetry_Indication->setval_gpio(Telemetry);
 }
 
 bool Indikatorpanel::Serviceable(void){

@@ -5,6 +5,7 @@ g++ src/lms.cpp \
     src/components/styr_och_logikenhet/sol.cpp \
     src/components/databussadapter/databussadapter.cpp \
     src/components/datastav/datastav.cpp \
+    libs/gpio/gpioclass.cpp \
     -I src/interfaces \
     -I src/components/databussadapter \
     -I src/components/datastav \
@@ -12,4 +13,5 @@ g++ src/lms.cpp \
     -I src/components/manoverpanel \
     -I src/components/indikatorpanel \
     -I src/components/telemetreringsmodul \
+    -I libs/gpio \
     -o bin/lms

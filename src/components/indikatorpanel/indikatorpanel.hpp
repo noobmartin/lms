@@ -6,6 +6,8 @@
 
 #include "indicator_provider.hpp"
 
+#include "gpioclass.hpp"
+
 class Indikatorpanel:
   public Component_Execution_Provider,
   public Component_Serviceability_Provider,
@@ -25,6 +27,10 @@ class Indikatorpanel:
     bool Recording;
     bool Telemetry;
     bool Fault;
+    
+    GPIOClass* Fault_Indication;
+    GPIOClass* Recording_Indication;
+    GPIOClass* Telemetry_Indication;
 };
 
 #endif
