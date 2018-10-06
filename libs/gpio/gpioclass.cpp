@@ -94,6 +94,20 @@ bool GPIOClass::setval_gpio(string val){
   return Success;
 }
 
+bool GPIOClass::getval_gpio(bool& val){
+  string vals;
+  Success = getval_gpio(vals);
+  
+  if(vals == "0"){
+    val = false;
+  }
+  else{
+    val = true;
+  }
+  
+  return Success;
+}
+
 bool GPIOClass::getval_gpio(string& val){
   string getval_str = "/sys/class/gpio/gpio" + this->gpionum + "/value";
   ifstream getvalgpio(getval_str.c_str());// open value file for gpio

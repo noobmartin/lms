@@ -6,6 +6,8 @@
 #include "component_execution_provider.hpp"
 #include "component_serviceability_provider.hpp"
 
+#include "gpioclass.hpp"
+
 class Manoverpanel:
   public Component_Execution_Provider,
   public Component_Serviceability_Provider{
@@ -19,6 +21,12 @@ class Manoverpanel:
     void Set_Manouver_Requirer(Manouver_Requirer::Manouver_Requirer* Requirer);
   private:
     Manouver_Requirer::Manouver_Requirer* MReq;
+    
+    GPIOClass* Recording_Request;
+    GPIOClass* Telemetry_Request;
+    
+    bool Recording_Selection;
+    bool Telemetry_Selection;
 };
 
 #endif
