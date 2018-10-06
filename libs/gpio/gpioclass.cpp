@@ -66,7 +66,7 @@ bool GPIOClass::setdir_gpio(string dir){
   return Success;
 }
 
-bool GPIOClass::setval_gpio(bool val){
+bool GPIOClass::setval_gpiob(bool val){
   if(val){
     Success = setval_gpio("1");
   } 

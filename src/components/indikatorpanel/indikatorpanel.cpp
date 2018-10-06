@@ -19,9 +19,9 @@ void Indikatorpanel::Initialize(void){
 }
 
 void Indikatorpanel::Execute(void){
-  Fault_Indication->setval_gpio(Fault);
-  Recording_Indication->setval_gpio(Recording);
-  Telemetry_Indication->setval_gpio(Telemetry);
+  Fault_Indication->setval_gpiob(Fault);
+  Recording_Indication->setval_gpiob(Recording);
+  Telemetry_Indication->setval_gpiob(Telemetry);
 }
 
 bool Indikatorpanel::Serviceable(void){

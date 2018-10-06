@@ -19,7 +19,7 @@ public:
     bool unexport_gpio();          // unexport GPIO
     bool setdir_gpio(string dir);  // Set GPIO Direction
     bool setval_gpio(string val);  // Set GPIO Value (putput pins)
-    bool setval_gpio(bool);
+    bool setval_gpiob(bool);
     bool getval_gpio(string& val); // Get GPIO Value (input/ output pins)
     bool getval_gpio(bool& val);
     string get_gpionum();         // return the GPIO number associated with the instance of an object

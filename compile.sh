@@ -14,4 +14,4 @@ g++ src/lms.cpp \
     -I src/components/indikatorpanel \
     -I src/components/telemetreringsmodul \
     -I libs/gpio \
-    -o bin/lms
+    -o bin/lms -g
