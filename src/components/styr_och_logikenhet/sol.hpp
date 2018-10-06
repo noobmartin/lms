@@ -11,6 +11,7 @@
 #include "datastav.hpp"
 #include "manoverpanel.hpp"
 #include "indikatorpanel.hpp"
+#include "telemetreringsmodul.hpp"
 
 class Sol:
   public Component_Execution_Provider,
@@ -27,10 +28,11 @@ class Sol:
     void Telemetry_Pressed(void);
     
   private:
-    Databussadapter DBA;
-    Datastav        DS;
-    Manoverpanel    MP;
-    Indikatorpanel  IP;
+    Databussadapter     DBA;
+    Datastav            DS;
+    Manoverpanel        MP;
+    Indikatorpanel      IP;
+    Telemetreringsmodul TM;
     
 };
 

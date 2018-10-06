@@ -8,6 +8,7 @@ void Sol::Initialize(void){
   MP.Initialize();
   MP.Set_Manouver_Requirer(this);
   IP.Initialize();
+  TM.Initialize();
 }
 
 void Sol::Execute(void){
@@ -15,6 +16,7 @@ void Sol::Execute(void){
   DS.Execute();
   MP.Execute();
   IP.Execute();
+  TM.Execute();
 }
 
 bool Sol::Serviceable(void){
@@ -42,8 +44,14 @@ bool Sol::Serviceable(void){
   else{
     printf("IP is not serviceable\n");
   }
+  if(TM.Serviceable()){
+    printf("TM is serviceable\n");
+  }
+  else{
+    printf("TM is not serviceable\n");
+  }
   
-  return (DBA.Serviceable() && DS.Serviceable() && MP.Serviceable() && IP.Serviceable() );
+  return (DBA.Serviceable() && DS.Serviceable() && MP.Serviceable() && IP.Serviceable() && TM.Serviceable() );
 }
 
 void Sol::Recording_Pressed(void){
