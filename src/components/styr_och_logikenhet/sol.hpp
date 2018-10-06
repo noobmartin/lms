@@ -9,10 +9,13 @@
 
 #include "databussadapter.hpp"
 #include "datastav.hpp"
+#include "manoverpanel.hpp"
+#include "indikatorpanel.hpp"
 
 class Sol:
   public Component_Execution_Provider,
-  public Component_Serviceability_Provider{
+  public Component_Serviceability_Provider,
+  public Manouver_Requirer::Manouver_Requirer{
 
   public:
     void Initialize(void);
@@ -20,9 +23,14 @@ class Sol:
     
     bool Serviceable(void);
     
+    void Recording_Pressed(void);
+    void Telemetry_Pressed(void);
+    
   private:
     Databussadapter DBA;
     Datastav        DS;
+    Manoverpanel    MP;
+    Indikatorpanel  IP;
     
 };
 

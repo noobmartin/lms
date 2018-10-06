@@ -9,7 +9,7 @@
 class Indikatorpanel:
   public Component_Execution_Provider,
   public Component_Serviceability_Provider,
-  public Indicator_Provider{
+  public Indicator_Provider::Indicator_Provider{
 
   public:
     void Initialize(void);
@@ -17,9 +17,9 @@ class Indikatorpanel:
     
     bool Serviceable(void);
     
-    void Indicate_Recording_State(const Indication_State_Type State);
-    void Indicate_Telemetry_State(const Indication_State_Type State);
-    void Indicate_Fault_State(const Indication_State_Type State);
+    void Indicate_Recording_State(const bool State);
+    void Indicate_Telemetry_State(const bool State);
+    void Indicate_Fault_State(const bool State);
     
   private:
     bool Recording;

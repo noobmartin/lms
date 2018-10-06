@@ -6,5 +6,6 @@ int main(){
   
   do{
     SOL.Execute();
+    SOL.Serviceable();
   }while(1);
 }
