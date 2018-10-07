@@ -6,6 +6,7 @@ g++ src/lms.cpp \
     src/components/databussadapter/databussadapter.cpp \
     src/components/datastav/datastav.cpp \
     libs/gpio/gpioclass.cpp \
+    libs/canbus/canbus.cpp \
     -I src/interfaces \
     -I src/components/databussadapter \
     -I src/components/datastav \
@@ -14,4 +15,5 @@ g++ src/lms.cpp \
     -I src/components/indikatorpanel \
     -I src/components/telemetreringsmodul \
     -I libs/gpio \
+    -I libs/canbus \
     -o bin/lms -g

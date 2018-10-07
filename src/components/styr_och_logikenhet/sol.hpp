@@ -13,6 +13,12 @@
 #include "indikatorpanel.hpp"
 #include "telemetreringsmodul.hpp"
 
+typedef enum{
+  Unserviceable,
+  Recording,
+  Not_Recording
+}Data_Recording_State_Type;
+
 class Sol:
   public Component_Execution_Provider,
   public Component_Serviceability_Provider,
@@ -33,6 +39,14 @@ class Sol:
     Manoverpanel        MP;
     Indikatorpanel      IP;
     Telemetreringsmodul TM;
+    
+    bool Recording_Toggle_Requested;
+    bool Telemetry_Toggle_Requested;
+    
+    Data_Recording_State_Type Data_Recording_State;
+    
+    void Data_Recording_Function(void);
+    void Telemetry_Function(void);
     
 };
 
