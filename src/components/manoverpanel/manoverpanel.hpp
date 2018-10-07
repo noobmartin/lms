@@ -27,6 +27,9 @@ class Manoverpanel:
     
     bool Recording_Selection;
     bool Telemetry_Selection;
+    
+    bool Is_Serviceable;
+    bool Permanent_Fault;
 };
 
 #endif

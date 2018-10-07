@@ -3,26 +3,31 @@
 void Manoverpanel::Initialize(void){
   MReq = 0;
   
-  Recording_Selection = false;
-  Telemetry_Selection = false;
+  Recording_Selection        = false;
+  Telemetry_Selection        = false;
+  Permanent_Fault            = false;
   
   Recording_Request = new GPIOClass("22");
   Telemetry_Request = new GPIOClass("23");
   
-  Recording_Request->export_gpio();
-  Telemetry_Request->export_gpio();
+  if(!Recording_Request->export_gpio() | !Telemetry_Request->export_gpio())
+    Permanent_Fault = true;
   
-  Recording_Request->setdir_gpio("in");
-  Telemetry_Request->setdir_gpio("in");
+  if(!Recording_Request->setdir_gpio("in") | !Telemetry_Request->setdir_gpio("in"))
+    Permanent_Fault = true; 
 }
 
 void Manoverpanel::Execute(void){
+  Is_Serviceable = true;
+  
   bool Recording_Current_Value;
   bool Telemetry_Current_Value;
   
-  Recording_Request->getval_gpio(Recording_Current_Value);
-  Telemetry_Request->getval_gpio(Telemetry_Current_Value);
+  // Read current values and check for errors.
+  if(!Recording_Request->getval_gpio(Recording_Current_Value) | !Telemetry_Request->getval_gpio(Telemetry_Current_Value))
+    Is_Serviceable = false;
   
+  // Inform the requirer (callback) if buttons have been pressed.
   if(Recording_Current_Value != Recording_Selection){
     MReq->Recording_Pressed();
     Recording_Selection = Recording_Current_Value;
@@ -36,7 +41,11 @@ void Manoverpanel::Execute(void){
 }
 
 bool Manoverpanel::Serviceable(void){
-  return true;
+  if(Permanent_Fault){
+    Is_Serviceable = false;
+  }
+
+  return Is_Serviceable;
 }
 
 void Manoverpanel::Set_Manouver_Requirer(Manouver_Requirer::Manouver_Requirer* Requirer){

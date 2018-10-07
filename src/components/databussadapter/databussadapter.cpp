@@ -27,7 +27,6 @@ void Databussadapter::Execute(void){
     Is_Serviceable = true;
   }
   else{
-    perror("SIOCGIFFLAGS");
     if(Bus.bus_is_open()){
       Bus.close_bus();
     }
