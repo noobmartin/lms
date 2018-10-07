@@ -20,7 +20,7 @@ class Datastav:
     bool Serviceable(void);
     
     bool Create_Recording(void);
-    void Put_Data(const void* Data, unsigned int Data_Size);
+    void Put_Data(Data_Entry_Type& Data);
     bool Close_Recording(void);
     
   private:

@@ -71,7 +71,7 @@ class canbus{
     bool open_bus(void);
     bool close_bus(void);
 
-    int receive(const unsigned size, char* buf, unsigned int* can_id);
+    int receive(can_frame* frame);
     
     bool bus_is_open(void);
 };

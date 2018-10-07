@@ -80,19 +80,15 @@ bool canbus::close_bus(void){
   return Success;
 }
 
-int canbus::receive(const unsigned size, char* buf, unsigned int* can_id){
-  int read_bytes = read(bus_socket, &read_frame, sizeof(read_frame));
+int canbus::receive(can_frame* frame){
+  int read_bytes = read(bus_socket, frame, sizeof(can_frame));
 
   if(read_bytes < 0){
     perror("canbus::receive");
     return -1;
   }
-  else{
-    *can_id = read_frame.can_id;
-    memcpy(buf, read_frame.data, read_frame.can_dlc);
-  }
 
-  return read_frame.can_dlc;
+  return frame->can_dlc;
 }
 
 bool canbus::bus_is_open(void){

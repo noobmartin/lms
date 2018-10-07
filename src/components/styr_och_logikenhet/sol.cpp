@@ -1,6 +1,7 @@
 #include "sol.hpp"
 
 #include <cstdio>
+#include "data_entry_format.hpp"
 
 void Sol::Initialize(void){
   DBA.Initialize();
@@ -81,12 +82,10 @@ void Sol::Data_Recording_Function(void){
     if(Data_Recording_State == Recording){
       IP.Indicate_Recording_State(true);
       
-      // @TODO: Hämta data från DBA och tryck ner på DS.
-      char Data[1024];
-      unsigned int Retreived_Data = 0;
-      unsigned int CAN_ID = 0;
-      DBA.Get_Data(1024, Data, &Retreived_Data, &CAN_ID);
-      DS.Put_Data(Data, Retreived_Data);
+      Data_Entry_Type Data;
+      while(DBA.Get_Data(&Data)){
+        DS.Put_Data(Data); 
+      }
       
       if(Recording_Toggle_Requested){
         Data_Recording_State = Not_Recording;

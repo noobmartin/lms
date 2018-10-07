@@ -7,6 +7,7 @@
 #include "component_execution_provider.hpp"
 #include "component_serviceability_provider.hpp"
 #include "data_provider.hpp"
+#include "data_entry_format.hpp"
 
 #include "canbus.hpp"
 
@@ -21,7 +22,7 @@ class Databussadapter:
     
     bool Serviceable(void);
     
-    void Get_Data(const unsigned int Storage_Size, void* Storage, unsigned int* Transferred_Data, unsigned int* Frame_Identifier);
+    bool Get_Data(Data_Entry_Type* Data_Entry);
     
   private:
     bool   Is_Serviceable;

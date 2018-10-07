@@ -50,9 +50,9 @@ bool Datastav::Serviceable(void){
   return Is_Serviceable;
 }
 
-void Datastav::Put_Data(const void* Data, unsigned int Data_Size){
+void Datastav::Put_Data(Data_Entry_Type& Data){
   if(Recording_File != NULL){
-    fwrite(Data, 1, Data_Size, Recording_File);
+    fwrite(&Data, 1, sizeof(Data_Entry_Type), Recording_File);
   }
 }
 

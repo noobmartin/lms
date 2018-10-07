@@ -4,6 +4,8 @@
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <cstdio>
+#include <chrono>
+#include <time.h>
 
 #include "databussadapter.hpp"
 
@@ -40,12 +42,28 @@ bool Databussadapter::Serviceable(void){
   return Is_Serviceable;
 }
 
-void Databussadapter::Get_Data(const unsigned int Storage_Size, void* Storage, unsigned int* Transferred_Data, unsigned int* Frame_Identifier){
+bool Databussadapter::Get_Data(Data_Entry_Type* Data){
+  bool Success = false;
+  
   if(Is_Serviceable && Bus.bus_is_open()){
     unsigned int can_id;
-    int Received_Bytes = Bus.receive(Storage_Size, (char*)Storage, Frame_Identifier);
+    int Received_Bytes = Bus.receive(&Data->Data);
     if(Received_Bytes > 0){
-      *Transferred_Data = Received_Bytes;
+      // @TODO: Fix to get us precision.
+      std::chrono::system_clock::time_point timestamp = std::chrono::system_clock::now();
+      time_t t = std::chrono::system_clock::to_time_t(timestamp);
+      tm utc = *gmtime(&t);
+      Data->Year   = utc.tm_year; 
+      Data->Month  = utc.tm_mon;
+      Data->Day    = utc.tm_mday;
+      Data->Hour   = utc.tm_hour;
+      Data->Minute = utc.tm_min;
+      Data->Second = utc.tm_sec;
+      Data->Microseconds = 0; 
+      
+      Success = true;
     }
   }
+  
+  return Success;
 }
