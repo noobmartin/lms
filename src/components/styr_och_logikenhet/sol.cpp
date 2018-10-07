@@ -11,6 +11,7 @@ void Sol::Initialize(void){
   TM.Initialize();
   
   Data_Recording_State = Unserviceable;
+  Fully_Serviceable = false;
 }
 
 void Sol::Execute(void){
@@ -22,6 +23,10 @@ void Sol::Execute(void){
   
   Data_Recording_Function();
   Telemetry_Function();
+  
+  Fully_Serviceable = DBA.Serviceable() && DS.Serviceable() && MP.Serviceable() && IP.Serviceable() && TM.Serviceable();
+  
+  IP.Indicate_Fault_State(Fully_Serviceable);
 }
 
 bool Sol::Serviceable(void){
@@ -56,7 +61,7 @@ bool Sol::Serviceable(void){
     printf("TM is not serviceable\n");
   }
   
-  return (DBA.Serviceable() && DS.Serviceable() && MP.Serviceable() && IP.Serviceable() && TM.Serviceable() );
+  return Fully_Serviceable;
 }
 
 void Sol::Recording_Pressed(void){

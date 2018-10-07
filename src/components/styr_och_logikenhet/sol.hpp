@@ -42,6 +42,7 @@ class Sol:
     
     bool Recording_Toggle_Requested;
     bool Telemetry_Toggle_Requested;
+    bool Fully_Serviceable;
     
     Data_Recording_State_Type Data_Recording_State;
     
