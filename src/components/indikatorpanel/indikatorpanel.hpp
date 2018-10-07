@@ -28,6 +28,9 @@ class Indikatorpanel:
     bool Telemetry;
     bool Fault;
     
+    bool Permanent_Indication_Fault;
+    bool Is_Serviceable;
+    
     GPIOClass* Fault_Indication;
     GPIOClass* Recording_Indication;
     GPIOClass* Telemetry_Indication;

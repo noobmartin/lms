@@ -82,7 +82,6 @@ bool GPIOClass::setval_gpio(string val){
   ofstream setvalgpio(setval_str.c_str()); // open value file for gpio
     
   if(!setvalgpio.is_open()){
-    cout << " OPERATION FAILED: Unable to set the value of GPIO"<< this->gpionum <<" ."<< endl;
     Success = false; 
   }
   else{
@@ -113,7 +112,6 @@ bool GPIOClass::getval_gpio(string& val){
   ifstream getvalgpio(getval_str.c_str());// open value file for gpio
     
   if(!getvalgpio.is_open()){
-    cout << " OPERATION FAILED: Unable to get value of GPIO"<< this->gpionum <<" ."<< endl;
     Success = false;
   }
   else{
