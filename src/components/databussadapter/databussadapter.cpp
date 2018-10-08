@@ -49,17 +49,21 @@ bool Databussadapter::Get_Data(Data_Entry_Type* Data){
     unsigned int can_id;
     int Received_Bytes = Bus.receive(&Data->Data);
     if(Received_Bytes > 0){
-      // @TODO: Fix to get us precision.
       std::chrono::system_clock::time_point timestamp = std::chrono::system_clock::now();
       time_t t = std::chrono::system_clock::to_time_t(timestamp);
       tm utc = *gmtime(&t);
+
+      // Why not mix C and C++ for the fuck of it.
+      struct timespec ts;
+      timespec_get(&ts, TIME_UTC);
+      
       Data->Year   = utc.tm_year; 
       Data->Month  = utc.tm_mon;
       Data->Day    = utc.tm_mday;
       Data->Hour   = utc.tm_hour;
       Data->Minute = utc.tm_min;
       Data->Second = utc.tm_sec;
-      Data->Microseconds = 0; 
+      Data->Microseconds = ts.tv_nsec; 
       
       Success = true;
     }
