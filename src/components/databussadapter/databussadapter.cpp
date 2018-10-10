@@ -12,6 +12,8 @@
 void Databussadapter::Initialize(void){
   Is_Serviceable = false;
 
+  Adapter.auto_setup();
+  
   memset(&ifr, 0, sizeof(ifr));
   strcpy(ifr.ifr_name, "slcan0");
   sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
@@ -20,15 +22,17 @@ void Databussadapter::Initialize(void){
 }
 
 void Databussadapter::Execute(void){
+  // @TODO: Re-write this logic to allow hot-plugging of CAN-USB adapter.
+  
   // Check if the interface is up.
-  if(ioctl(sock, SIOCGIFINDEX, &ifr) == 0){
+  if(ioctl(sock, SIOCGIFINDEX, &ifr) == 0){ 
     if(!Bus.bus_is_open()){
       Bus.open_bus();
     }
     
     Is_Serviceable = true;
   }
-  else{
+  else{ 
     if(Bus.bus_is_open()){
       Bus.close_bus();
     }

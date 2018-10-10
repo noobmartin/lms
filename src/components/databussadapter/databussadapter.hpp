@@ -10,6 +10,7 @@
 #include "data_entry_format.hpp"
 
 #include "canbus.hpp"
+#include "lawicel-canusb.hpp"
 
 class Databussadapter:
   public Component_Execution_Provider,
@@ -29,6 +30,7 @@ class Databussadapter:
     struct ifreq ifr;
     int    sock;
     cannet::canbus Bus;
+    canusb_devices::lawicel_canusb Adapter;
 };
 
 #endif

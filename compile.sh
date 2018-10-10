@@ -7,6 +7,7 @@ g++ src/lms.cpp \
     src/components/datastav/datastav.cpp \
     libs/gpio/gpioclass.cpp \
     libs/canbus/canbus.cpp \
+    libs/busadapter/lawicel-canusb.cpp \
     -I src/interfaces \
     -I src/components/databussadapter \
     -I src/components/datastav \
@@ -16,4 +17,5 @@ g++ src/lms.cpp \
     -I src/components/telemetreringsmodul \
     -I libs/gpio \
     -I libs/canbus \
+    -I libs/busadapter \
     -o bin/lms -g
