@@ -4,11 +4,13 @@
 #include <string>
 #include <chrono>
 #include <ctime>
+#include <sys/mount.h>
 
 #include "datastav.hpp"
 
 const char* mtabs     = "/etc/mtab";
 const char* locations = "/mnt/Datastav";
+const char* device    = "/dev/sdd1";
 
 void Datastav::Initialize(void){
   Is_Serviceable = false;
@@ -21,6 +23,7 @@ void Datastav::Execute(void){
     Is_Serviceable = true;
   }
   else{
+    mount(device, locations, "vfat", 0, "");
     Is_Serviceable = false;    
   }
 
