@@ -45,13 +45,14 @@ class lawicel_canusb{
   private:
     int ttyfd;
     char tty_tx_buf[MAX_TTY_TX_SIZE];
-    char serial_device_path[PATH_MAX];
+    
 
   public:
     lawicel_canusb();
     ~lawicel_canusb();
     
     char interface_name[IFNAMSIZ];
+    char serial_device_path[PATH_MAX];
 
     /*
      * This function probes the system to find any attached LAWICEL CANUSB dongles.

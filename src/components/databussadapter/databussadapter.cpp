@@ -21,23 +21,49 @@ void Databussadapter::Initialize(void){
   Bus.set_busname(7, "slcan0");
 }
 
-void Databussadapter::Execute(void){
-  // @TODO: Re-write this logic to allow hot-plugging of CAN-USB adapter.
-  
+void Databussadapter::Execute(void){ 
   // Check if the interface is up.
-  if(ioctl(sock, SIOCGIFINDEX, &ifr) == 0){ 
-    if(!Bus.bus_is_open()){
-      Bus.open_bus();
-    }
+  if(ioctl(sock, SIOCGIFINDEX, &ifr) == 0){
+    if(ifr.ifr_flags & IFF_UP){
+      printf("IFF_UP\n");
+      
+      if(!Bus.bus_is_open()){
+        Bus.open_bus();
+      }
     
-    Is_Serviceable = true;
+      Is_Serviceable = true;
+    }
+    else{
+      printf("Not IFF_UP\n");
+      Is_Serviceable = false;
+    }
+
   }
-  else{ 
+  else{
     if(Bus.bus_is_open()){
       Bus.close_bus();
     }
-    
+     
     Is_Serviceable = false;
+  }
+  
+  if(!Is_Serviceable){
+    Adapter.close_lawicel_canusb();
+    Adapter.delete_lawicel_canusb_interface();
+    Adapter.unset_lawicel_canusb_device();
+    
+    Adapter.find_lawicel_canusb_devices();
+    if(Adapter.set_lawicel_canusb_device(Adapter.serial_device_path)){
+      if(Adapter.close_lawicel_canusb()){
+        if(Adapter.set_lawicel_canusb_speed(canusb_devices::Kbit_500)){
+          if(Adapter.open_lawicel_canusb()){
+            if(Adapter.create_lawicel_canusb_interface()){
+            
+            }
+          }
+        }
+      }
+    }
   }
   
 }
