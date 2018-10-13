@@ -6,6 +6,7 @@
  */
 
 #include "canbus.hpp"
+#include <fcntl.h>
 
 namespace cannet{
 
@@ -48,6 +49,7 @@ bool canbus::open_bus(void){
     Success = false;
   }
   else{
+    fcntl(bus_socket, F_SETFL, O_NONBLOCK);
     strcpy(ifr.ifr_name, busname);
     ioctl(bus_socket, SIOCGIFINDEX, &ifr);
 

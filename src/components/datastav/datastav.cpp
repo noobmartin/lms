@@ -5,12 +5,13 @@
 #include <chrono>
 #include <ctime>
 #include <sys/mount.h>
+#include <unistd.h>
 
 #include "datastav.hpp"
 
 const char* mtabs     = "/etc/mtab";
 const char* locations = "/mnt/Datastav";
-const char* device    = "/dev/sdd1";
+const char* device    = "/dev/sda1";
 
 void Datastav::Initialize(void){
   Is_Serviceable = false;
@@ -65,11 +66,12 @@ bool Datastav::Create_Recording(void){
     Recording_Filename.append("/");
 
     std::time_t t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    Recording_Filename.append(std::ctime(&t));
+    Recording_Filename.append("olle");//std::ctime(&t));
     
     Recording_File = fopen(Recording_Filename.c_str(), "a");
     if(Recording_File == NULL){
       perror("Datastav::Create_Recording");
+sleep(20);
       Success = false;
     }
     else{

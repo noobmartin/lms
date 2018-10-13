@@ -91,15 +91,23 @@ void Sol::Data_Recording_Function(void){
         Data_Recording_State = Not_Recording;
         
         DS.Close_Recording();
+
+        Recording_Toggle_Requested = false;
       }
     }
     else if(Data_Recording_State == Not_Recording){
       IP.Indicate_Recording_State(false);
+
       if(Recording_Toggle_Requested){
-        Data_Recording_State = Recording;
-        
-        DS.Create_Recording();
+        if(DS.Create_Recording()){
+          Data_Recording_State = Recording;
+        }
+
+        Recording_Toggle_Requested = false;
       }
+    }
+    else if(Data_Recording_State == Unserviceable){
+      Data_Recording_State = Not_Recording;
     }
     
   }
