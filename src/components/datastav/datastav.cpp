@@ -10,7 +10,7 @@
 #include "datastav.hpp"
 
 const char* mtabs     = "/etc/mtab";
-const char* locations = "/mnt/Datastav";
+const char* locations = "/media/pi/DATASTAV";
 const char* device    = "/dev/sda1";
 
 void Datastav::Initialize(void){
@@ -24,7 +24,7 @@ void Datastav::Execute(void){
     Is_Serviceable = true;
   }
   else{
-    mount(device, locations, "vfat", 0, "");
+    //mount(device, locations, "vfat", 0, "");
     Is_Serviceable = false;    
   }
 
@@ -65,13 +65,15 @@ bool Datastav::Create_Recording(void){
     std::string Recording_Filename(locations);
     Recording_Filename.append("/");
 
+    char time_string[100];
     std::time_t t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    Recording_Filename.append("olle");//std::ctime(&t));
+    strftime(time_string, 100, "%Y%m%d%H%M%S", localtime(&t));
+
+    Recording_Filename.append(time_string);
     
     Recording_File = fopen(Recording_Filename.c_str(), "a");
     if(Recording_File == NULL){
       perror("Datastav::Create_Recording");
-sleep(20);
       Success = false;
     }
     else{

@@ -25,7 +25,6 @@ void Databussadapter::Execute(void){
   // Check if the interface is up.
   if(ioctl(sock, SIOCGIFINDEX, &ifr) == 0){
     if(ifr.ifr_flags & IFF_UP){
-      printf("IFF_UP\n");
       
       if(!Bus.bus_is_open()){
         Bus.open_bus();
@@ -34,7 +33,6 @@ void Databussadapter::Execute(void){
       Is_Serviceable = true;
     }
     else{
-      printf("Not IFF_UP\n");
       Is_Serviceable = false;
     }
 

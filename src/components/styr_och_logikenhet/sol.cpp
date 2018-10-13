@@ -27,7 +27,7 @@ void Sol::Execute(void){
   
   Fully_Serviceable = DBA.Serviceable() && DS.Serviceable() && MP.Serviceable() && IP.Serviceable() && TM.Serviceable();
   
-  IP.Indicate_Fault_State(Fully_Serviceable);
+  IP.Indicate_Fault_State(!Fully_Serviceable);
 }
 
 bool Sol::Serviceable(void){
@@ -74,9 +74,10 @@ void Sol::Telemetry_Pressed(void){
 }
 
 void Sol::Data_Recording_Function(void){
-  if(!DBA.Serviceable() && !DS.Serviceable()){
+  if(!DBA.Serviceable() | !DS.Serviceable()){
     Data_Recording_State = Unserviceable;
     DS.Close_Recording();
+    IP.Indicate_Recording_State(false);
   }
   else{
     if(Data_Recording_State == Recording){
